@@ -20,13 +20,11 @@ func main() {
 	switch comando {
 	case 1:
 		fmt.Println("Monitorando...")
-		break
+
 	case 2:
 		fmt.Println("Exibindo logs...")
-		break
 	case 0:
 		fmt.Println("Saindo do programa...")
-		break
 	default:
 		fmt.Println("Comando Inválido")
 	}
