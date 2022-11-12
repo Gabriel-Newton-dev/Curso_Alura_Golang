@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"strconv"
@@ -27,6 +28,7 @@ func main() {
 			iniciarMonitoramento()
 		case 2:
 			fmt.Println("Exibindo logs...")
+			imprimelogs()
 		case 0:
 			fmt.Println("Saindo do programa")
 			os.Exit(0) // Para sair com sucesso.
@@ -126,11 +128,23 @@ func registraLog(site string, status bool) {
 	}
 
 	// iremos utilizar o strconv para converter esse bool em string
-	arquivo.WriteString(site + "- Online: " + strconv.FormatBool(status) + "\n")
+	arquivo.WriteString(time.Now().Format("01-02-2006 15:04:05") + " - " + site + "- Online: " + strconv.FormatBool(status) + "\n")
 
 	arquivo.Close()
 
 	// nessa funcao os.OpenFile, ele recebe o nome do arquivo que vc quer abrir, as flags ( ou seja o que vc quer fazer)
 	// os.O_RDWR - escrever e ler usamos os.O_RWDR | os.O_CREATE( | que significa ou)
 	// e colocamos a permissao - 0666 - pode criar e ler
+}
+
+// Vai criar uma funcao, para abrir o arquivo, ler e imrpimir
+
+func imprimelogs() {
+
+	logs, err := ioutil.ReadFile("log.txt") // ler arquivo
+	if err != nil {
+		fmt.Println("Apresentou erro na função imprime logs", err)
+	}
+	fmt.Println(string(logs))
+
 }
