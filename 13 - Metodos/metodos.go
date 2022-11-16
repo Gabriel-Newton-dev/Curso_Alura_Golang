@@ -19,7 +19,7 @@ func (c ContaCorrente) Depositar(deposito float64) (string, float64, string) {
 
 }
 
-func (c ContaCorrente) Sacar(Saque float64) (string, float64, string) {
+func (c *ContaCorrente) Sacar(Saque float64) (string, float64, string) {
 	if Saque > 0 && Saque < c.Saldo {
 		c.Saldo -= Saque
 		return "Deposito realizado com sucesso, seu saldo é de R$", c.Saldo, "Reais"
