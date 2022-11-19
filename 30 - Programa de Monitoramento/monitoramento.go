@@ -124,7 +124,7 @@ func registraLog(site string, status bool) {
 
 	arquivo, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
-		fmt.Println("Apresentou erro na função resgitra log", err)
+		fmt.Println("Apresentou erro na função registra log", err)
 	}
 
 	// iremos utilizar o strconv para converter esse bool em string
