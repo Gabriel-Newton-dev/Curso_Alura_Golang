@@ -3,17 +3,17 @@ package main
 import "fmt"
 
 type ContaCorrente struct {
-	titular       string
-	numeroAgencia int
-	numeroConta   int
-	saldo         float64
+	Titular       string
+	NumeroAgencia int
+	NumeroConta   int
+	Saldo         float64
 }
 
 func (c *ContaCorrente) Sacar(valorDoSaque float64) {
-	podeSacar := valorDoSaque > 0 && valorDoSaque <= c.saldo
+	podeSacar := valorDoSaque > 0 && valorDoSaque <= c.Saldo
 	if podeSacar {
-		c.saldo -= valorDoSaque
-		fmt.Printf("O valor do saque foi de R$ %v Reais, o saldo atualizado é de R$ %v Reais\n", valorDoSaque, c.saldo)
+		c.Saldo -= valorDoSaque
+		fmt.Printf("O valor do saque foi de R$ %v Reais, o Saldo atualizado é de R$ %v Reais\n", valorDoSaque, c.Saldo)
 	} else {
 		fmt.Println("Saldo Insuficiente")
 	}
@@ -23,19 +23,19 @@ func (c *ContaCorrente) Sacar(valorDoSaque float64) {
 func (c *ContaCorrente) Depositar(valorDoDeposito float64) {
 	podeDepositar := valorDoDeposito >= 0
 	if podeDepositar {
-		c.saldo += valorDoDeposito
-		fmt.Printf("O valor do Deposito foi de R$ %v Reais, seu saldo atualizado é de R$ %v Reais\n", valorDoDeposito, c.saldo)
+		c.Saldo += valorDoDeposito
+		fmt.Printf("O valor do Deposito foi de R$ %v Reais na conta de %s, seu Saldo atualizado é de R$ %v Reais\n", valorDoDeposito, c.Titular, c.Saldo)
 	} else {
 		fmt.Println("Não é possível depositar valor negativo")
 	}
 }
 
 func (c *ContaCorrente) Transferencia(valorDaTransferencia float64, contaDestino *ContaCorrente) {
-	podeTransferir := valorDaTransferencia < c.saldo && valorDaTransferencia > 0
+	podeTransferir := valorDaTransferencia < c.Saldo && valorDaTransferencia > 0
 	if podeTransferir {
-		c.saldo -= valorDaTransferencia
-		contaDestino.saldo += valorDaTransferencia
-		fmt.Printf("Valor de R$ %v Reais, foi transferido com sucesso, para conta do %v.\n", valorDaTransferencia, contaDestino.titular)
+		c.Saldo -= valorDaTransferencia
+		contaDestino.Saldo += valorDaTransferencia
+		fmt.Printf("Valor de R$ %v Reais, foi transferido com sucesso, para conta do %v.\n", valorDaTransferencia, contaDestino.Titular)
 	} else {
 		fmt.Println("Transferência não realizada")
 	}
@@ -51,6 +51,6 @@ func main() {
 	contaDaJurema.Sacar(1000)
 	contaDoGuilherme.Depositar(13)
 	contaDaJurema.Transferencia(200, &contaDoGuilherme)
-	fmt.Println("R$", contaDaJurema.saldo, "Reais")
-	fmt.Println("R$", contaDoGuilherme.saldo, "Reais")
+	fmt.Println("R$", contaDaJurema.Saldo, "Reais")
+	fmt.Println("R$", contaDoGuilherme.Saldo, "Reais")
 }
